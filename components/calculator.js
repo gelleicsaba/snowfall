@@ -109,8 +109,8 @@ class Calculator extends SFComponent {
                 :Input type="button" onclick="@page:.pushBtn('.')" value="." class="input op" /
             :Td class="td"
                 :Input type="button" onclick="@page:.pushBtn('=')" value="=" class="input op" /
-    :Br /
-    :Br /
+    @Br:
+    @Br:
 `;
 
     constructor(obj) { 
