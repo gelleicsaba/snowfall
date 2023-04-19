@@ -42,7 +42,7 @@ class Home extends SFComponent {
 
 ## 04. Routes
 
-You can create route paths and assign a page comps to these. There are some route manager
+You can create route paths and assign page comps to these. There are some route manager
 functions. You can push or pop it, or you can load a page by giving the route path.
 
 ```
