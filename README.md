@@ -293,9 +293,9 @@ The functions can be found in snowfall/component.js, and you can view the lifecy
 
 
 1. create(): It performs after constructor. The create calls "load" and "render" too in superclass.
-1. load(): Its called by create. It runs only once! (It's an empty method in superclass, but you can override it)
-1. evaluate(): Its called by render as first step. (It's an empty method in superclass, but you can override it)
-1. render(): Its called by create, but you can turn off automation with "autorender" property. This function will make the html & replace vars/bindings, etc...
-1. start(): Its called by render as final step. You can set up here the final operations.
-1. final(): Its called when you change the route. It stops the intervals and clear data bindings.
+1. load(): It's called by create. It runs only once! (It's an empty method in superclass, but you can override it)
+1. evaluate(): It's called by render as first step. (It's an empty method in superclass, but you can override it)
+1. render(): It's called by create, but you can turn off automation with "autorender" property. This function will make the html & replace vars/bindings, etc...
+1. start(): It's called by render as final step. You can set up here the final operations.
+1. final(): It's called when you change the route. It stops the intervals and clear data bindings.
 
