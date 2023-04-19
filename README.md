@@ -12,8 +12,8 @@ packages.js -> js,css,cdn includes & meta settings
 routes.js -> routes   
 main.js -> starting page component   
 snowfall/component.js -> template component superclass   
-snowfall/page.js -> page factory & route manager
-snowfall/component.js -> template component superclass
+snowfall/page.js -> page factory & route manager   
+snowfall/component.js -> template component superclass   
 snowfall/tree.js -> template rendering   
 
 ## 03. Components
