@@ -87,6 +87,8 @@ An input element with binding in template:
 `:Div
     :Form
         :Input id="myInput" type="text" value="" :bind=myInputValue /
+    :Div
+        You typed {{myInputValue}}.
     ...
 `
 
