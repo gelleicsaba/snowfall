@@ -1,7 +1,7 @@
 # **Snowfall**
 
 ## 01. What's this
-This a funny vanilla js framework, very easy and simple, and very beta version.   
+This is a funny vanilla js framework, very easy and simple, and very beta version.   
 Why the name is snowfall? There was a snow falling when i started this in april.   
 Inspiring things: yaml, python, VueJs
 
