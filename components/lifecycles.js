@@ -4,6 +4,8 @@ class Lifecycles extends SFComponent {
         this.state.lfc.push("constructor() performed");
     }
 
+    title = "Lifecycles";
+
     state = {
         lfc : []
     };

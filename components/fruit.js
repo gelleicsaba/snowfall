@@ -1,6 +1,8 @@
 class Fruit extends SFComponent {
     constructor(obj) { super(obj); }
     
+    title = null;
+
     state = {};
 
     classes = 

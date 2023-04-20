@@ -1,5 +1,7 @@
 class SubRenders extends SFComponent {
 
+    title = "Rendering subcomponents";
+
     classes = ``;
 
     template = 
@@ -32,6 +34,7 @@ class SubRenders extends SFComponent {
         class SubComponent extends SFComponent {
             constructor(obj) { super(obj); }
             state = params;
+            title = null;
             classes = 
 `.another-style { 
     color: blue;

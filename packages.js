@@ -1,6 +1,7 @@
+const headTitleDefault = "Exmples";
+
 const metaElements = [
-    { charset: "utf-8" }
-    , { name: "viewport", content: "width=device-width, initial-scale=1.0" }
+    { name: "viewport", content: "width=device-width, initial-scale=1.0" }
 ];
 
 const cdns = [
@@ -24,15 +25,18 @@ const cssInjects = [
     "main"
 ];
 
+(() => {
+    const head = document.getElementsByTagName('head')[0];
+    const script = document.createElement('title');
+    script.innerText = headTitleDefault;
+    head.insertBefore(script, head.children[1]);
+})();
+
 metaElements.forEach((item) => {
     const head = document.getElementsByTagName('head')[0];
     const script = document.createElement('meta');
     for (let name in item) {
-        if (name != "charset") {
-            script[name] = item[name];
-        } else {
-            script.setAttribute(name, item[name]);
-        }
+        script.setAttribute(name, item[name]);
     }
     head.insertBefore(script, head.children[1]);
 });

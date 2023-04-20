@@ -8,6 +8,7 @@ class SFComponent {
         this.routes = routes;        
     }
 
+    title = undefined;
     state = {};
 
     bindings = [];
@@ -33,6 +34,13 @@ class SFComponent {
     }
 
     render() {
+        if (this.title != null) {
+            if (this.title != undefined) {
+                document.title = this.title;
+            } else {
+                document.title = headTitleDefault;
+            }
+        }
         document.body.innerHTML = this.output();
         this.start();
         this.started = true;
@@ -152,6 +160,11 @@ class SFComponent {
             this.refs[id] = document.getElementById(id);
         }
         return this.refs[id];
+    }
+
+    changeTitle(title) {
+        this.title = title;
+        document.title = title;
     }
 
 }

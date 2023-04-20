@@ -1,5 +1,7 @@
 class Conditions extends SFComponent {
 
+    title="Conditions";
+
     classes = ``;
 
     template = 
@@ -29,6 +31,10 @@ class Conditions extends SFComponent {
     constructor(obj) { 
         globals.counter = 1;
         super(obj);
+    }
+
+    render() {
+        super.render();
     }
 
     evaluate() {

@@ -2,6 +2,8 @@ class SubComponents extends SFComponent {
 
     constructor(obj) { super(obj); }
 
+    title = "Components & properties";
+
     state = {};
 
     classes = 

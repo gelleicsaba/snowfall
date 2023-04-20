@@ -2,6 +2,8 @@ class DataBindings extends SFComponent {
 
     constructor(obj) { super(obj); }
 
+    title="Data bindings";
+
     state = {
         myInputValue: { value: undefined}
         , myText: { value: undefined}

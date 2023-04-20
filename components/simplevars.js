@@ -2,6 +2,8 @@ class SimpleVars extends SFComponent {
 
     constructor(obj) { super(obj); }
 
+    title = "Simple var replaces";
+
     state = {
         myVar: "World"
         , myText: ["Nice", " to", "@Br:", "meet", "@Br:", "you", "!"]

@@ -1,5 +1,7 @@
 class Calculator extends SFComponent {
 
+    title = "Calculator";
+
     state = {
         result: "0"
     };

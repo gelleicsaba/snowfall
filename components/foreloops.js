@@ -2,6 +2,8 @@ class ForeachLoops extends SFComponent {
 
     constructor(obj) { super(obj); }
 
+    title = "Loops";
+
     state = {
         myObjArray: [ 
             { name: "John Wick", phone: "100-JOHN", cars: [ { name:"BMW" }, { name:"Volkswagen"} ] }

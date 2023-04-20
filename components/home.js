@@ -1,9 +1,15 @@
 class Home extends SFComponent {
 
+    title = "Home";
+
     template = 
 `:Div
     @navbar:
 `;
+
+    render() {
+        super.render();
+    }
 
     evaluate() {
         super.evaluate();

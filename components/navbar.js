@@ -1,6 +1,8 @@
 class Navbar extends SFComponent {
     constructor(obj) { super(obj); }
 
+    title = null;
+
     state = {};
 
     classes = 
