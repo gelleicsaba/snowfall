@@ -33,10 +33,7 @@ class SFComponent {
     }
 
     render() {
-        this.evaluate();
-        this.elementTree = new SFElementTree(this);
-        this.elementTree.build();
-        document.body.innerHTML = this.elementTree.output;
+        document.body.innerHTML = this.output();
         this.start();
         this.started = true;
     };
