@@ -23,8 +23,8 @@ class SubRenders extends SFComponent {
         super.evaluate();
         const t = this;
         t.state.navbar = (new Navbar(t.routes)).output();
-        t.state.subComponent1 = t.getAnotherSubComponent({greetings:"Hi", name:"Joe"});
-        t.state.subComponent2 = t.getAnotherSubComponent({greetings:"Astalavista", name:"Baby"});
+        t.state.subComponent1 = t.getSubComponent({greetings:"Hi", name:"Joe"});
+        t.state.subComponent2 = t.getSubComponent({greetings:"Astalavista", name:"Baby"});
     }
 
     getSubComponent(params) {

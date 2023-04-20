@@ -38,6 +38,7 @@ class Navbar extends SFComponent {
             :Input type="button" :click="/subcomponents" value="COMPONENTS & PROPS" class="input-navbar" /
             :Input type="button" :click="/foreloops" value="LOOPS" class="input-navbar" /            
             :Input type="button" :click="/conditions" value="CONDITIONS & EVENTS" class="input-navbar" /
+            :Input type="button" :click="/subrenders" value="SUBCOMPONENT RENDERING" class="input-navbar" /
             :Input type="button" :click="/lifecycles" value="LIFECYCLES" class="input-navbar" /
             :Input type="button" :click="/calc" value="CALCULATOR" class="input-navbar" /
     :Div class="hint"
