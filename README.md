@@ -299,3 +299,20 @@ The functions can be found in snowfall/component.js, and you can view the lifecy
 1. start(): It's called by render as final step. You can set up here the final operations.
 1. final(): It's called when you change the route. It stops the intervals and clears the data bindings.
 
+## 0B. Change title
+The SFComponent (superclass) has a title prop. that you can overwrite in your class.
+This will be the title in cases:
+* null: the title wont be changed 
+* undefined: the title will be that you specify in package.js
+* string: the title will be the specific string 
+
+Title can be changed when performing render() function or if you call this.changeTitle(..) manually.
+```
+    ...
+    render() { super.render(); }
+    evaluate() {  
+        super.evaluate();
+        const d = new Date();
+        this.title = "Form - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    }
+```
