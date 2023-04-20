@@ -46,10 +46,7 @@ class SFComponent {
         if (cntn != undefined && cntn == false) {
             return;
         }
-        this.evaluate();
-        this.elementTree = new SFElementTree(this);
-        this.elementTree.build();
-        document.body.innerHTML = this.elementTree.output;
+        document.body.innerHTML = this.output();
      };
 
     output() {
