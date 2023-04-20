@@ -60,11 +60,11 @@ class Lifecycles extends SFComponent {
     :Div class="lf eval-lf"
         evaluate(): Its called by render as first step. (It's an empty method in superclass, but you can override it)
     :Div class="lf render-lf"
-        render(): Its called by create, but you can turn off automation with "autorender" property. This function will make the html & replace vars/bindings, etc...
+        render(): Its called by create, but you can turn off the automation with the "autorender" property. This function will make the html & replace vars/bindings, etc...
     :Div class="lf start-lf"
         start(): Its called by render as final step. You can set up here the final operations.
     :Div class="lf final-lf"
-        final(): Its called when you change the route. It stops the intervals and clear data bindings.
+        final(): Its called when you change the route. It stops the intervals and clears the data bindings.
 
     @Br:
     @Br:
