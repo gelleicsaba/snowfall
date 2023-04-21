@@ -316,3 +316,25 @@ Title can be changed when performing render() function or if you call this.chang
         this.title = "Form - " + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
     }
 ```
+
+## 0C. CLI
+
+show CLI info
+```
+node sf
+```
+
+create an empty project
+```
+node sf create prj YOUR_PROJECT_NAME
+```
+
+add a component
+```
+node sf add comp YOUR_COMPONENT
+```
+
+add a route
+```
+node sf add route ROUTE_NAME COMPONENT_NAME
+```
