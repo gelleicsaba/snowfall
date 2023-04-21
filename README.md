@@ -340,6 +340,7 @@ add a route
 ```
 node sf add route ROUTE_NAME COMPONENT_NAME
 ```
+In route name use // instead of / (e.g. //home )
 
 (Future features:)
 ```
