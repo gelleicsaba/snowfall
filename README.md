@@ -319,6 +319,8 @@ Title can be changed when performing render() function or if you call this.chang
 
 ## 0C. CLI
 
+The CLI command line tool can be found in /cli/sf.js. You need the NodeJs to run it.
+
 show CLI info
 ```
 node sf
@@ -337,4 +339,10 @@ node sf add comp YOUR_COMPONENT
 add a route
 ```
 node sf add route ROUTE_NAME COMPONENT_NAME
+```
+
+(Future features:)
+```
+node sf bundle
+node sf run dev-server
 ```
