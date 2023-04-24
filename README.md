@@ -305,6 +305,7 @@ use #foreach in template.
 ## 0A. Binding mutations
 
 The 'Mutations' means in this framework that you can change tha data on binding event, or you can perform other operation on binding event.
+
 E.g.: Your input is wating to type a number. You can scan it and change the state.
 
 The factorial calculator:
