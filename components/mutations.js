@@ -14,8 +14,9 @@ class Mutatations extends SFComponent {
     @navbar:
     @Br:
     :Div class="hint"
-        Binding input value to variable @Br:
+        Binding mutations @Br:
     :Div
+        Factorial calculator: @Br:
         :Form
             :Input id="myInput" type="text" value="" :bind=myInputValue /
             @Br:@Br:
