@@ -20,6 +20,7 @@ const injects = [
     , "./components/home"
     , "./components/fruit"
     , "./components/calculator"
+    , "./components/mutations"
 ];
 const cssInjects = [
     "main"

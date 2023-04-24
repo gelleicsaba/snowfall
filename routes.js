@@ -16,6 +16,7 @@ class Routes {
         , '/subrenders' : new SubRenders(this)
         , '/lifecycles' : new Lifecycles(this)
         , '/calc' : new Calculator(this)
+        , '/mutations' : new Mutatations(this)
     }
 
     push(route) {

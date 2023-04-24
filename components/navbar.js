@@ -42,6 +42,7 @@ class Navbar extends SFComponent {
             :Input type="button" :click="/conditions" value="CONDITIONS & EVENTS" class="input-navbar" /
             :Input type="button" :click="/subrenders" value="SUBCOMPONENT RENDERING" class="input-navbar" /
             :Input type="button" :click="/lifecycles" value="LIFECYCLES" class="input-navbar" /
+            :Input type="button" :click="/mutations" value="MUTATIONS" class="input-navbar" /
             :Input type="button" :click="/calc" value="CALCULATOR" class="input-navbar" /
     :Div class="hint"
         Routes history & log: @Br:

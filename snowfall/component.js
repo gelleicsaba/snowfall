@@ -143,12 +143,12 @@ class SFComponent {
                 value = obj.value.value;
             }
         }
-        obj.value.value = value;
-        obj.preValue = value;
+        obj.value.value = this.performMutatation(ref, value);
+        obj.preValue = obj.value.value;
         let objClasses = document.getElementsByClassName("." + ref + "SnwFl");
         if (objClasses != undefined && objClasses.length > 0) {
             for (let q = 0; q < objClasses.length; ++q)  {
-                objClasses[q].innerHTML = value.toString();
+                objClasses[q].innerHTML = value;
             }
         }
 
@@ -166,5 +166,16 @@ class SFComponent {
         this.title = title;
         document.title = title;
     }
+
+    mutatations = {};
+
+    performMutatation(ref, value) {
+        if (this.mutatations[ref] == undefined) {
+            return value;
+        } else {
+            return this.mutatations[ref](value);
+        }
+    }
+
 
 }

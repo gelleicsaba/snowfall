@@ -1,5 +1,20 @@
 # **Snowfall**
 
+# Table of Contents
+* [01. What's this](#toc1)
+* [02. Files](#toc2)
+* [03. Components](#toc3)
+* [04. Routes](#toc4)
+* [05. Simple replaces](#toc5)
+* [06. Data bindings](#toc6)
+* [07. Sub components & props](#toc7)
+* [08. Events](#toc8)
+* [09. Conditions & Loops](#toc9)
+* [0A. Binding mutations](#toc10)
+* [0B. Lifecycles](#toc11)
+* [0C. Changing the title](#toc12)
+* [0D. CLI](#toc13)
+
 ## 01. What's this
 This is a funny vanilla js framework, very easy and simple, and very beta version.   
 Why the name is snowfall? There was a snow falling when i started this in april.   
@@ -287,7 +302,63 @@ use #foreach in template.
     ...
 ```
 
-## 0A. Lifecycles
+## 0A. Binding mutations
+
+The 'Mutations' means in the framework that you can change tha data on binding event, or you can perform other operation on binding event.
+E.g.: Your input is wating to type a number. You can scan it and change the state.
+
+The factorial calculator:
+```
+class Mutatations extends SFComponent {
+    constructor(obj) { super(obj); }
+    title = "Factorial calculator";
+
+    state = {
+        myInputValue: { value: undefined}
+        , factorial: { value: undefined}
+    };
+
+    template = 
+`:Div
+    :Form
+        :Input id="myInput" type="text" value="" :bind=myInputValue /
+        @Br:@Br:
+        The {{myInputValue}} factorial is {{factorial}}.
+`;
+
+    mutatations = {
+        "myInputValue": (value) => {
+            const fact = (x) => {
+                if (x==0 || isNaN(x)) return 1;
+                return x * fact(x-1);
+            };
+            const factValue = fact(parseInt(value));
+            this.state.factorial.value = factValue;
+            return value; // the input value won't be changed!
+        }
+    };
+
+    start() {
+        super.start();
+        const t = this;
+        const initValue = "1";
+        t.state.myInputValue = t.addBinding("myInputValue", initValue, "myInput", "value");
+        t.state.factorial = t.addBinding("factorial", initValue);
+        t.listenBindings();
+    }
+```
+
+As you can see, there is a 'mutatations' property where you can specify the functions assigned to the binding names. 
+
+The general format is:
+```
+    mutatations = {
+        "<binding name 1>": (value) => <your operations &/or result>
+        [, "<binding name 2>": (value) => <your operations &/or result>]...
+    };
+```
+
+## 0B. Lifecycles
 
 The functions can be found in snowfall/component.js, and you can view the lifecycle in here.
 
@@ -299,7 +370,7 @@ The functions can be found in snowfall/component.js, and you can view the lifecy
 1. start(): It's called by render as final step. You can set up here the final operations.
 1. final(): It's called when you change the route. It stops the intervals and clears the data bindings.
 
-## 0B. Change title
+## 0C. Changing the title
 The SFComponent (superclass) has a title prop. that you can overwrite in your class.
 This will be the title in cases:
 * null: the title wont be changed 
@@ -317,7 +388,7 @@ Title can be changed when performing render() function or if you call this.chang
     }
 ```
 
-## 0C. CLI
+## 0D. CLI
 
 The CLI command line tool can be found in /cli/sf.js. You need the NodeJs to run it.
 
