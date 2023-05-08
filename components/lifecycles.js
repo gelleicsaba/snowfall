@@ -113,7 +113,7 @@ class Lifecycles extends SFComponent {
         this.state.lfc.push("evaluate() starts");
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
         this.state.lfc.push("evaluate() ends");
     }
 

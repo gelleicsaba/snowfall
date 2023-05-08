@@ -11,7 +11,28 @@ class SFElementTree {
         t.tabs = tabs;
         const template = t.control.template.replace(/\t/g, ' ');
         const classes = t.control.classes;
-        const state = t.control.state;
+        t.state = structuredClone(t.control.state);
+        if (langSettings.languages.length > 0) {
+            for (let prop in defaultLang) {
+                if (defaultLang[prop].indexOf("|") == -1) {
+                    t.state["~" + prop] = defaultLang[prop];
+                } else {
+                    t.state["~" + prop] = defaultLang[prop].split("|");
+                }
+            }
+        }
+        t.res = [];
+        if (resourceSettings.apply) {
+            for (let prop in resources) {
+                if (! prop.startsWith("text/")) {
+                    t.state["=" + prop] = resourceSettings.path + "/" + resources[prop];
+                } else {
+                    t.state["=" + prop] = resources[prop];
+                }
+            }
+        }
+        
+
         t.expl = template.split("\n");
         while (t.checkForCycles()) {};
         t.elements = Array(t.expl.length);
@@ -78,8 +99,8 @@ class SFElementTree {
         }
         t.output += classes + '</style>';
         t.preorder(0);
-        for (let name in state) {
-            const value = state[name];
+        for (let name in t.state) {
+            const value = t.state[name];
             if (! Array.isArray(value)) {
                 const re = new RegExp('@'+name+':', 'g');
                 t.output = t.output.replace(re, value);
@@ -160,7 +181,7 @@ class SFElementTree {
                         }
                     }
 
-                    const obj = t.control.state[objname];
+                    const obj = t.state[objname];
                     if (obj.length == 0) {
                         t.expl[x-1] += " /"; // close the empty block
                     }
@@ -231,7 +252,7 @@ class SFElementTree {
                     for (let y = 0; y < block.length; ++y) {
                         block[y] = block[y].slice(t.tabs);
                     }
-                    const obj = t.control.state[objname];
+                    const obj = t.state[objname];
                     let cc = head;
                     if (obj) {
                         cc = cc.concat(block).concat(foot);
@@ -275,7 +296,7 @@ class SFElementTree {
                     for (let y = 0; y < block.length; ++y) {
                         block[y] = block[y].slice(t.tabs);
                     }
-                    const obj = t.control.state[objname];
+                    const obj = t.state[objname];
                     let cc = head;
                     if (! obj) {
                         cc = cc.concat(block).concat(foot);
@@ -301,10 +322,9 @@ class SFElementTree {
                         objstr += tokens[z];
                     }
 
-                    let state = t.control.state;
                     if (objstr.indexOf("@") > -1 && objstr.indexOf(":")) {
-                        for (let name in state) {
-                            const value = state[name];
+                        for (let name in t.state) {
+                            const value = t.state[name];
                             if (! Array.isArray(value)) {
                                 const re = new RegExp('@'+name+':', 'g');
                                 objstr = objstr.replace(re, "'" + value + "'");

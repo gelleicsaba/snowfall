@@ -44,13 +44,15 @@ class Navbar extends SFComponent {
             :Input type="button" :click="/lifecycles" value="LIFECYCLES" class="input-navbar" /
             :Input type="button" :click="/mutations" value="MUTATIONS" class="input-navbar" /
             :Input type="button" :click="/calc" value="CALCULATOR" class="input-navbar" /
+            :Input type="button" :click="/langs" value="LANGUAGES" class="input-navbar" /
+            :Input type="button" :click="/ress" value="RESOURCES" class="input-navbar" /
     :Div class="hint"
         Routes history & log: @Br:
     :Div
         :A onclick="main.stepBack()" href="#" class="a-navbar"
             &lArr;@Space:BACK
         @Space:@Space:
-        :Div:
+        :Div
             #foreach routePath
                 :Span class="route-navbar"
                     @value:
@@ -60,7 +62,7 @@ class Navbar extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.routePath = t.routes.routes;
+        t.$.routePath = t.$r.routes;
     }
 
 

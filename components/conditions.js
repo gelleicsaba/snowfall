@@ -40,10 +40,10 @@ class Conditions extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
-        t.state.counter = globals.counter;
-        t.state.counterIsPrime = t.isPrimeNumber(globals.counter);
-        t.state.counterIsOdd = globals.counter % 2 == 1;
+        t.$.navbar = (new Navbar(t.$r)).output();
+        t.$.counter = globals.counter;
+        t.$.counterIsPrime = t.isPrimeNumber(globals.counter);
+        t.$.counterIsOdd = globals.counter % 2 == 1;
     }
 
     incCounter() {

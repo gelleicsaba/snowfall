@@ -39,13 +39,13 @@ class SimpleVars extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
                 
         const d = new Date();
         const dt = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
         
-        t.state.myEvalText = dt;        
-        t.state.myNumber = ~~(Math.random() * 45 + 1);
+        t.$.myEvalText = dt;        
+        t.$.myNumber = ~~(Math.random() * 45 + 1);
     }
         
 }

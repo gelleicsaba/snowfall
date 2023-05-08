@@ -11,9 +11,12 @@
 * [08. Events](#toc8)
 * [09. Conditions & Loops](#toc9)
 * [0A. Binding mutations](#toc10)
-* [0B. Lifecycles](#toc11)
-* [0C. Changing the title](#toc12)
-* [0D. CLI](#toc13)
+* [0B. Short names](#toc11)
+* [0C. Making multilingual](#toc12)
+* [0D. Resources](#toc13)
+* [0E. Lifecycles](#toc14)
+* [0F. Changing the title](#toc15)
+* [10. CLI](#toc16)
 
 ## 01. What's this
 This is a funny vanilla js framework, very easy and simple, and very beta version.   
@@ -310,7 +313,7 @@ E.g.: Your input is wating to type a number. You can scan it and change the stat
 
 The factorial calculator:
 ```
-class Mutatations extends SFComponent {
+class Mutations extends SFComponent {
     constructor(obj) { super(obj); }
     title = "Factorial calculator";
 
@@ -327,7 +330,7 @@ class Mutatations extends SFComponent {
         The {{myInputValue}} factorial is {{factorial}}.
 `;
 
-    mutatations = {
+    mutations = {
         "myInputValue": (value) => {
             const fact = (x) => {
                 if (x==0 || isNaN(x)) return 1;
@@ -349,17 +352,132 @@ class Mutatations extends SFComponent {
     }
 ```
 
-As you can see, there is a 'mutatations' property where you can specify the functions assigned to the binding names. 
+As you can see, there is a 'mutations' property where you can specify the functions assigned to the binding names. 
 
 The general format is:
 ```
-    mutatations = {
+    mutations = {
         "<binding name 1>": (value) => <your operations &/or result>
         [, "<binding name 2>": (value) => <your operations &/or result>]...
     };
 ```
 
-## 0B. Lifecycles
+## 0B. Short names
+
+There are some shorter names, to make the code shorter. There are shorter versions of state and routes, but we must call the parent super call first.
+```
+    this.$.xy can be used instead of this.state.xy
+
+    this.$r can be used instead of this.routes
+```
+
+Now, let's look at in a evaulate function
+```
+    evaluate() {
+        super.evaluate();
+        const t = this;
+        t.$.navbar = (new Navbar(t.$r)).output();
+        t.$.greetings = "hello";
+        t.$.anyone = "world";
+    }    
+```
+
+## 0C. Making multilingual
+
+If you would like to make pages with multi language, you have to place the language files in /resources/lang.
+
+e.g.: 
+
+
+```
+/resources/lang/en.js:
+const enLang = {
+    "hello-world": "Hello world!",
+    ...
+}
+
+/resources/lang/de.js:
+const deLang = {
+    "hello-world": "Hallo welt!",
+    ...
+}
+```
+
+Set up the langsettings in packages.js
+```
+const langSettings = {
+    languages: ["en", "de"],
+    default: "en",
+    strict: true,
+};
+```
+(The strict mode means that the porperties will be checked all. If any is missing an error message will be in output)
+
+And in the template you can place the resource.
+```
+    ...
+    :Div
+        :H2
+            @~hello-world:
+    ...
+```
+
+You can change the language with changeLang().
+```
+        const t = this;
+        t.nextThick(() => {
+            super.changeLang("de");
+        });
+```
+
+## 0D. Resources
+
+You can use resources to get path of media files, like images,videos,etc., or you can get a simple text with it.
+
+The resource file is in the /resource folder.
+```
+const resources = {
+    "img/hello" : "/h2.gif",
+    "icon/add" : "/iadd.png",
+    "text/greeting" : "Hello multiverse!",
+}
+```
+
+You can apply this feature in packages.js.
+```
+...
+const resourceSettings = {
+    apply: true,
+    path: "public"
+};
+...
+```
+You have to place the files in the given 'path' (it's "/public" by default)
+
+You can use a resource in your components. But you can use logical name only and not the pysical path.
+```
+    template =     
+`:Div
+    :Div
+        :Img src="@=img/hello:" width="100" /
+    :Div
+        :H3
+            @=text/greeting:
+        :H4
+            @capitalGreeting:
+`;
+
+    evaluate() {
+        super.evaluate();
+        const t = this;
+        this.$.capitalGreeting = t.getResource("text/greeting").toUpperCase();
+    }    
+
+```
+You are able to get the resource text in your functions too, just call getResource(..).
+
+
+## 0E. Lifecycles
 
 The functions can be found in snowfall/component.js, and you can view the lifecycle in here.
 
@@ -371,7 +489,7 @@ The functions can be found in snowfall/component.js, and you can view the lifecy
 1. start(): It's called by render as final step. You can set up here the final operations.
 1. final(): It's called when you change the route. It stops the intervals and clears the data bindings.
 
-## 0C. Changing the title
+## 0F. Changing the title
 The SFComponent (superclass) has a title prop. that you can overwrite in your class.
 This will be the title in cases:
 * null: the title wont be changed 
@@ -389,7 +507,7 @@ Title can be changed when performing render() function or if you call this.chang
     }
 ```
 
-## 0D. CLI
+## 10. CLI
 
 The CLI command line tool can be found in /cli/sf.js. You need the NodeJs to run it.
 

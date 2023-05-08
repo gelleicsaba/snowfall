@@ -122,7 +122,7 @@ class Calculator extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
     }
 
 
@@ -136,32 +136,32 @@ class Calculator extends SFComponent {
             // skip redundant operators
             return;
         }
-        if (isNum && (t.state.result.length < t.MAX() || t.objState.rewrite) ) {
+        if (isNum && (t.$.result.length < t.MAX() || t.objState.rewrite) ) {
             if (t.objState.rewrite) {
                 // rewrite the previous result value
-                t.state.result = '0';
+                t.$.result = '0';
                 t.objState.rewrite = false;
             }
-            if (t.state.result == '0') {
-                t.nextThick((q) => { t.state.result = btn; });
+            if (t.$.result == '0') {
+                t.nextThick((q) => { t.$.result = btn; });
             } else {
-                t.nextThick((q) => { t.state.result = t.state.result + btn; });
+                t.nextThick((q) => { t.$.result = t.$.result + btn; });
             }
-        } else if (btn == '.' && t.state.result.length < t.MAX()) {
+        } else if (btn == '.' && t.$.result.length < t.MAX()) {
             if (! t.objState.dot) {
                 t.nextThick((q) => { 
                     t.objState.dot = true;
-                    t.state.result = t.state.result + btn; 
+                    t.$.result = t.$.result + btn; 
                 });
             }
-        } else if (btn == '<' && t.state.result.length > 0) {
+        } else if (btn == '<' && t.$.result.length > 0) {
             t.nextThick((q) => { 
-                t.state.result = t.state.result.substring(0, t.state.result.length - 1);
-                if (t.state.result == '') {
-                    t.state.result = "0";
+                t.$.result = t.$.result.substring(0, t.$.result.length - 1);
+                if (t.$.result == '') {
+                    t.$.result = "0";
                 } else {
-                    if (t.state.result[t.state.result.length - 1] == '.') {
-                        t.state.result = t.state.result.substring(0, t.state.result.length - 1);
+                    if (t.$.result[t.$.result.length - 1] == '.') {
+                        t.$.result = t.$.result.substring(0, t.$.result.length - 1);
                         t.objState.dot = false;
                     }
                 }
@@ -169,7 +169,7 @@ class Calculator extends SFComponent {
         } else if (btn == '+' || btn == '-' || btn == '*' || btn == '/') {
             t.nextThick((q) => {
                 if (t.objState.instructions.length != 1) {
-                    t.objState.instructions.push(t.state.result);
+                    t.objState.instructions.push(t.$.result);
                 }                
                 t.objState.instructions.push(btn);
                 t.calculate();
@@ -179,31 +179,31 @@ class Calculator extends SFComponent {
         } else if (btn == '=') {
             if (t.objState.instructions.length > 0) {
                 t.nextThick((q) => {
-                    t.objState.instructions.push(t.state.result);
+                    t.objState.instructions.push(t.$.result);
                     t.objState.instructions.push("=");
                     t.calculate();
                     t.objState.rewrite = true;
                     t.objState.instructions = [];
-                    t.objState.instructions.push(t.state.result);
+                    t.objState.instructions.push(t.$.result);
                     t.objState.dot = false;
                 });
             }
         } else if (btn == "C") {
             t.nextThick((q) => {
                 t.objState = t.C_STATE();
-                t.state.result = "0";
+                t.$.result = "0";
             });
         } else if (btn == "CE") {
             t.nextThick((q) => {
-                t.state.result = "0";
+                t.$.result = "0";
                 t.objState.rewrite = false;
                 t.objState.dot = false;
             });
         } else if (btn == "+-") {
             t.nextThick((q) => {
 
-                if (t.state.result != 0.0) {
-                    t.state.result = -t.state.result;
+                if (t.$.result != 0.0) {
+                    t.$.result = -t.$.result;
                 }   
 
                 t.objState.rewrite = false;
@@ -228,7 +228,7 @@ class Calculator extends SFComponent {
 
         for (let x = 0; x < instructions.length; ++x) {
             if (instructions[x] == t.ERROR) {
-                t.state.result = "ERROR";
+                t.$.result = "ERROR";
                 return;
             } else if (instructions[x] == "+" || instructions[x] == "-" || instructions[x] == "*" || instructions[x] == "/" || instructions[x] == "=")  {
                 op = instructions[x];
@@ -245,7 +245,7 @@ class Calculator extends SFComponent {
                         break;
                     case "/":
                         if (parseFloat(instructions[x]) == 0.0) {
-                            t.state.result = t.ERROR;
+                            t.$.result = t.ERROR;
                             return;
                         }
                         num = num / parseFloat(instructions[x]);
@@ -261,9 +261,9 @@ class Calculator extends SFComponent {
 
         }
         if (frac(num) == 0) {
-            t.state.result = num.toFixed(0).substring(0, t.MAX());
+            t.$.result = num.toFixed(0).substring(0, t.MAX());
         } else {
-            t.state.result = trimEnd0(num.toFixed(t.MAX_FRACTIONS())); //.substring(0, t.MAX());
+            t.$.result = trimEnd0(num.toFixed(t.MAX_FRACTIONS())); //.substring(0, t.MAX());
         }
     }
 

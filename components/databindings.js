@@ -55,21 +55,20 @@ class DataBindings extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
     }
 
     start() {
         super.start();
         const t = this;
-
         /* add input bindings */
-        t.state.myInputValue = t.addBinding("myInputValue", "My Text", "myInput", "value");
-        t.state.myText = t.addBinding("myText", "Initial text");
+        t.$.myInputValue = t.addBinding("myInputValue", "My Text", "myInput", "value");
+        t.$.myText = t.addBinding("myText", "Initial text");
         t.listenBindings();
 
         let myCounter = 1;
         const intvalFunc = () => {
-            t.state.myText.value = myCounter.toString();
+            t.$.myText.value = myCounter.toString();
             ++ myCounter;
         }
         

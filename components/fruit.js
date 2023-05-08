@@ -46,7 +46,7 @@ float: left;
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.price = (t.state.price * 378.0).toFixed(0);
+        t.$.price = (t.$.price * 378.0).toFixed(0);
     }
 
 }

@@ -5,7 +5,7 @@ class SFComponent {
     started = false;
 
     constructor(routes) {
-        this.routes = routes;        
+        this.routes = routes;
     }
 
     title = undefined;
@@ -24,6 +24,8 @@ class SFComponent {
     intervals = [];
 
     create() {
+        this.$ = this.state;
+        this.$r = this.routes;
         if (! this.loaded) {
             this.load();
             this.loaded = true;
@@ -34,6 +36,8 @@ class SFComponent {
     }
 
     render() {
+        this.$ = this.state;
+        this.$r = this.routes;
         if (this.title != null) {
             if (this.title != undefined) {
                 document.title = this.title;
@@ -47,6 +51,8 @@ class SFComponent {
     };
 
     nextThick(setters) {
+        this.$ = this.state;
+        this.$r = this.routes;
         const cntn = setters();
         if (cntn != undefined && cntn == false) {
             return;
@@ -55,15 +61,23 @@ class SFComponent {
      };
 
     output() {
+        this.$ = this.state;
+        this.$r = this.routes;
         this.evaluate();
         this.elementTree = new SFElementTree(this);
         this.elementTree.build();
         return this.elementTree.output;
     }
 
-    load() {}
+    load() {
+        this.$ = this.state;
+        this.$r = this.routes;
+    }
 
-    start() {}
+    start() {
+        this.$ = this.state;
+        this.$r = this.routes;
+    }
 
     final() {
         this.intervals.forEach((q) => {
@@ -73,6 +87,8 @@ class SFComponent {
     }
     
     evaluate() {
+        this.$ = this.state;
+        this.$r = this.routes;
         this.state.Space = '&nbsp;';
         this.state.page = 'main.page';
         this.state.Lt = '&lt;';
@@ -143,7 +159,7 @@ class SFComponent {
                 value = obj.value.value;
             }
         }
-        obj.value.value = this.performMutatation(ref, value);
+        obj.value.value = this.performMutation(ref, value);
         obj.preValue = obj.value.value;
         let objClasses = document.getElementsByClassName("." + ref + "SnwFl");
         if (objClasses != undefined && objClasses.length > 0) {
@@ -167,15 +183,28 @@ class SFComponent {
         document.title = title;
     }
 
-    mutatations = {};
+    mutations = {};
 
-    performMutatation(ref, value) {
-        if (this.mutatations[ref] == undefined) {
+    performMutation(ref, value) {
+        if (this.mutations[ref] == undefined) {
             return value;
         } else {
-            return this.mutatations[ref](value);
+            return this.mutations[ref](value);
         }
     }
 
+    changeLang(lang) {
+        defaultLang = eval("structuredClone("+lang+"Lang)");
+    }
+
+    getLangResource(x) {
+        return defaultLang[x];
+    }
+    setLangResource(x, value) {
+        defaultLang[x] = value;
+    }
+    getResource(x) {
+        return resources[x];
+    }
 
 }

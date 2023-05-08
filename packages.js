@@ -21,11 +21,22 @@ const injects = [
     , "./components/fruit"
     , "./components/calculator"
     , "./components/mutations"
+    , "./components/langs"
+    , "./components/ress"
 ];
 const cssInjects = [
     "main"
 ];
 
+const langSettings = {
+    languages: ["en", "de"],
+    default: "en",
+    strict: true,
+};
+const resourceSettings = {
+    apply: true,
+    path: "public"
+};
 (() => {
     const head = document.getElementsByTagName('head')[0];
     const script = document.createElement('title');
@@ -100,7 +111,51 @@ function requireCSS(fname) {
 cssInjects.forEach((element) => {
     requireCSS(element);    
 });
+var defaultLang = undefined;
+if (langSettings.languages.length > 0) {
+    langSettings.languages.forEach((q) => {
+        const head = document.getElementsByTagName('head')[0];
+        const script = document.createElement('script');
+        script.src = "./resources/lang/" + q + ".js";
+        script.type = 'text/javascript';
+        head.insertBefore(script, head.children[head.children.length - 1]);
+    });
+}
+if (!String.format) {
+    String.format = function(format) {
+      var args = Array.prototype.slice.call(arguments, 1);
+        return format.replace(/{(\d+)}/g, function(match, number) { 
+            return typeof args[number] != 'undefined' ? args[number] : match;
+        });
+    };
+}
+if (resourceSettings.apply) {
+    const head = document.getElementsByTagName('head')[0];
+    const script = document.createElement('script');
+    script.src = "./resources/resources.js";
+    script.type = 'text/javascript';
+    head.insertBefore(script, head.children[head.children.length - 1]);
+}
 var main = undefined; 
 window.addEventListener("load", (event) => {
+    let good = true;
+    if (langSettings.languages.length > 0) {
+        defaultLang = eval("structuredClone(" + langSettings.default + "Lang)");
+        if (langSettings.strict) {
+            langSettings.languages.forEach((q) => {
+                if (q != langSettings.default) {
+                    const checkLang = eval(q + "Lang");
+                    for (let propname in defaultLang) {
+                        if (checkLang[propname] == undefined) {
+                            document.writeln("Strict mode: The langauge file is invalid!<br>");
+                            document.writeln("Strict mode: The '"+propname+"' does not exist in "+ q +"Lang !<br>");
+                            good = false;
+                        }
+                    }
+                }
+            });
+        }
+    }
+    if (! good) return;
     main = new Main();
 });

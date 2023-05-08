@@ -23,7 +23,7 @@ class Mutatations extends SFComponent {
             The {{myInputValue}} factorial is {{factorial}}.
 `;
 
-    mutatations = {
+    mutations = {
         "myInputValue": (value) => {
             const fact = (x) => {
                 if (x==0 || isNaN(x)) return 1;
@@ -38,7 +38,7 @@ class Mutatations extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
     }
 
     start() {
@@ -47,8 +47,8 @@ class Mutatations extends SFComponent {
 
         /* add input bindings */
         const initValue = "1";
-        t.state.myInputValue = t.addBinding("myInputValue", initValue, "myInput", "value");
-        t.state.factorial = t.addBinding("factorial", initValue);
+        t.$.myInputValue = t.addBinding("myInputValue", initValue, "myInput", "value");
+        t.$.factorial = t.addBinding("factorial", initValue);
         t.listenBindings();
     }
         

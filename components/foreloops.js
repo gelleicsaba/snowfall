@@ -46,7 +46,7 @@ class ForeachLoops extends SFComponent {
     evaluate() {
         super.evaluate();
         const t = this;
-        t.state.navbar = (new Navbar(t.routes)).output();
+        t.$.navbar = (new Navbar(t.$r)).output();
         t.renderCars();       
     }
 
@@ -61,7 +61,7 @@ class ForeachLoops extends SFComponent {
             @name:`;
         }
 
-        t.state.myObjArray.forEach((item) => {
+        t.$.myObjArray.forEach((item) => {
             let carComponent = new CarComponent();
             carComponent.state.cars = item.cars;
             item.carComponent = carComponent.output();

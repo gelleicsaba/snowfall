@@ -17,6 +17,8 @@ class Routes {
         , '/lifecycles' : new Lifecycles(this)
         , '/calc' : new Calculator(this)
         , '/mutations' : new Mutatations(this)
+        , '/langs' : new Langs(this)
+        , '/ress' : new Ress(this)
     }
 
     push(route) {
